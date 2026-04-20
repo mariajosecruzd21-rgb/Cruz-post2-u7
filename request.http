@@ -1,0 +1,36 @@
+### GET todos los productos
+# Debería retornar 200 OK y una lista vacía `[]` si aún no hay nada.
+GET http://localhost:8080/api/productos
+
+
+### POST crear un producto
+# Debería retornar 201 Created y el JSON del producto insertado.
+POST http://localhost:8080/api/productos
+Content-Type: application/json
+
+{
+  "nombre": "Laptop",
+  "descripcion": "Laptop de alta gama",
+  "precio": 1200,
+  "stock": 10
+}
+
+### GET producto por ID
+# Debería retornar 200 OK con el producto creado. (Asumiendo que el ID es 1)
+GET http://localhost:8080/api/productos/1
+Accept: application/json
+
+
+
+### PATCH reducir stock exitosamente
+# Debería retornar 200 OK y el producto con el stock actualizado (quedarían 8)
+PATCH http://localhost:8080/api/productos/1/stock?cantidad=2
+Accept: application/json
+
+
+
+### PATCH reducir stock al romperse la regla de negocio
+# Debería retornar 400 Bad Request con un JSON que indique "Stock insuficiente. Disponible: 8"
+PATCH http://localhost:8080/api/productos/1/stock?cantidad=20
+Accept: application/json
+
